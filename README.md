@@ -60,7 +60,7 @@ to list the virtual environments available on your computer with the active envi
 Activate the `student-groups` virtual environment by running the following command:
 
 ```
-source activate student-groups
+conda activate student-groups
 ```
 
 Verify the `student-groups` environment was installed correctly using:
@@ -84,7 +84,7 @@ When prompted to proceed type `y` and hit `Enter`. This will install the correct
 Now activate the `student-groups` environment by running:
 
 ```
-source activate student-groups
+conda activate student-groups
 ```
 
 You need to install one additional package called PuLP using conda-forge before you are ready to optimize student groups. Install the pulp package using the following command
@@ -320,7 +320,7 @@ Go to the terminal window and press `Control + C` two times to shut down the not
 To deactivate the `student-groups` environment, run:
 
 ```
-source deactivate student-groups
+conda deactivate
 ```
 
 If you want to remove the `student-groups` virtual environment from your computer (this is optional), use the command:
