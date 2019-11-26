@@ -13,8 +13,9 @@ Use linear programming to assign students to groups subject to constraints speci
 
 Review the optimal student groupings in tabular form.
 
-<img src="images/optimal_student_groupings.png" title="optimal student groupings">
-
+<p align="center">
+    <img src="images/optimal_student_groupings.png" title="optimal student groupings">
+</p>
 
 ## Getting Started
 
@@ -102,7 +103,6 @@ conda list
 
 You should see a list of installed packages and package versions including `jupyter 1.0.0`, `openpyxl 3.0.1`, `pandas 0.25.2`, `pulp 1.6.8`, `python 3.7.5`, and `xlrd 1.2.0` . If instead you see an error message, reference [installing packages](https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/) in the conda documentation.
 
-
 ### *Alternative without Anaconda: Install necessary packages*
 
 You will need `Python 3.5` or greater along with the `pandas`, `pulp`, `jupyter`, `xlrd`, and `openpyxl` packages to successfully run the student groups optimization program.
@@ -119,7 +119,9 @@ Go to `File > Open` and select the `Upload` tab. Click `Select a file from your 
 
 Go to the `Person Setup` sheet. Delete example data and enter student names and characteristics in the specified columns.
 
-<img src="images/person_setup.png" title="Person Setup">
+<p align="center">
+    <img src="images/person_setup.png" title="Person Setup">
+</p>    
 
 - __name:__ enter student name
 - __advanced:__ enter 1 for advanced student, 0 otherwise
@@ -133,7 +135,9 @@ Go to the `Person Setup` sheet. Delete example data and enter student names and 
 
 Go to the `Grouping Setup` sheet. Delete example data and enter grouping ID and size values in the specified columns.
 
-<img src="images/grouping_setup.png" title="Grouping Setup">
+<p align="center">
+    <img src="images/grouping_setup.png" title="Grouping Setup">
+</p>      
 
 - __group id:__ enter a unique name for each group
 - __size:__ enter the maximum size for each group
@@ -142,7 +146,9 @@ Go to the `Grouping Setup` sheet. Delete example data and enter grouping ID and 
 
 Go to the `Constraint - With` sheet to specify which (if any) students to assign to a group together.
 
-<img src="images/constraint_with.png" title="Constraint - With">
+<p align="center">
+    <img src="images/constraint_with.png" title="Constraint - With">
+</p>    
 
 - __name 1 - 6:__ enter student names in the same row to ensure assigned to a group together
 
@@ -150,7 +156,9 @@ Go to the `Constraint - With` sheet to specify which (if any) students to assign
 
 Go to the `Constraint - Not With` sheet to specify which (if any) students to assign to different groups.
 
-<img src="images/constraint_not_with.png" title="Constraint - Not With">
+<p align="center">
+    <img src="images/constraint_not_with.png" title="Constraint - Not With">
+</p>
 
 - __name 1 - 6:__ enter student names in the same row to ensure assigned to different groups
 
@@ -158,7 +166,9 @@ Go to the `Constraint - Not With` sheet to specify which (if any) students to as
 
 Go to the `Constraint - In` sheet to specify which (if any) students to assign to a specific group.
 
-<img src="images/constraint_in.png" title="Constraint - In">
+<p align="center">
+    <img src="images/constraint_in.png" title="Constraint - In">
+</p>    
 
 - __name:__ enter student name
 - __group id:__ enter specific group to assign to student 
@@ -167,7 +177,9 @@ Go to the `Constraint - In` sheet to specify which (if any) students to assign t
 
 Go to the `Constraint - Not In` sheet to specify which (if any) students to not assign to a specific group.
 
-<img src="images/constraint_not_in.png" title="Constraint - Not In">
+<p align="center">
+    <img src="images/constraint_not_in.png" title="Constraint - Not In">
+</p>    
 
 - __name:__ enter student name
 - __group id:__ enter specific group to not assign to student 
@@ -176,7 +188,9 @@ Go to the `Constraint - Not In` sheet to specify which (if any) students to not 
 
 Go to the `Constraint - Homogenous` sheet to specify which (if any) groups to assign only students with a specified characteristic.
 
-<img src="images/constraint_homogenous.png" title="Constraint - Homogenous">
+<p align="center">
+    <img src="images/constraint_homogenous.png" title="Constraint - Homogenous">
+</p>   
 
 - __group id:__ enter group to assign only students with specified characteristic and characteristic value
 - __characteristic:__ specify characteristic
@@ -186,7 +200,9 @@ Go to the `Constraint - Homogenous` sheet to specify which (if any) groups to as
 
 Go to the `Constraint - Maximum` sheet to specify the maximum number of students with specified characteristic to assign to each group.
 
-<img src="images/constraint_maximum.png" title="Constraint - Maximum">
+<p align="center">
+    <img src="images/constraint_maximum.png" title="Constraint - Maximum">
+</p>    
 
 - __maximum:__ enter the maximum number of students with specified characteristic per group
 - __characteristic:__ specify characteristic
@@ -210,8 +226,6 @@ Navigate through the folder structure to the `student-groups-optimization-master
 
 Congratulations! You are now a student group optimizing machine!
 
-
-
 ### _Alternative without Jupyter Notebook: Run the program in terminal window_
 
 Go to the terminal window where you activated your `student-groups` environment and run a command of the form:
@@ -229,21 +243,25 @@ and optional arguments:
 - __-v:__ print solution(s) in terminal window
 - __-s:__ save student groups to Excel spreadsheet
 
-
 _Examples:_
 
 - Run program using student, group, and constraint data in `data_template.xlsx`. Output 3 optimal student groupings. Print student groupings to terminal window and save solutions to Excel spreadsheet.
 
-<img src="images/run_program_1.png" title="Run Program - Example 1">
+<p align="center">
+    <img src="images/run_program_1.png" title="Run Program - Example 1">
+</p>    
 
 - Run program using student, group, and constraint data in `data_template.xlsx`. Output 2 optimal student groupings. Save solutions to Excel spreadsheet.
 
-<img src="images/run_program_2.png" title="Run Program - Example 2">
+<p align="center">
+    <img src="images/run_program_2.png" title="Run Program - Example 2">
+</p>    
 
 - Run program using student, group, and constraint data in `data_template.xlsx`. Output 1 optimal student grouping. Print student groupings to terminal window.
 
-<img src="images/run_program_3.png" title="Run Program - Example 3">
-
+<p align="center">
+    <img src="images/run_program_3.png" title="Run Program - Example 3">
+</p>    
 
 Congratulations! You are now a student group optimizing machine!
 
@@ -263,8 +281,9 @@ _Example:_
 
 - Check that the student grouping solution(s) output by the program and saved in `groupings_20191126_111642.xlsx` satisfy the constraints specified in `data_template.xlsx`.
 
-<img src="images/check_constraints_1.png" title="Check Constraints Example">
-
+<p align="center">
+    <img src="images/check_constraints_1.png" title="Check Constraints Example">
+</p>    
 
 #### _Optional: Check uniqueness of multiple solutions_ 
 
@@ -282,8 +301,9 @@ _Example:_
 
 - Review the number of students who change groups from one solution to the next where the `groupings_20191126_111642.xlsx` file holds the solutions to compare and the `data_template.xlsx` file holds the student, group, and constraint data.
 
-<img src="images/check_uniqueness_1.png" title="Check Uniqueness Example">
-
+<p align="center">
+    <img src="images/check_uniqueness_1.png" title="Check Uniqueness Example">
+</p>    
 
 ## Cleanup
 
@@ -318,8 +338,3 @@ exit
 and close the terminal window.
 
 Cleanup complete!
-
-
-```python
-
-```
