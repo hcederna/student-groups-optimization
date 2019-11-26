@@ -146,22 +146,9 @@ def homogenous_constraint(prob, d_vars, file, sheet="Constraint - Homogenous"):
     return prob
 
 
-def max_char_constraint_rigid(prob, d_vars, groups, file, sheet="Constraint - Maximum"):
+def max_char_constraint(prob, d_vars, groups, file, elastic, sheet="Constraint - Maximum"):
     """
-    Add constraint to ensure no more than maximum number of people with specified characteristic assigned to each group.
-    """
-    person_df = import_from_template(file, "Person Setup")
-    max_df = import_from_template(file, sheet)
-    for idx, max_row in max_df.iterrows():
-        person_with_char_df = person_df.loc[person_df[max_row["characteristic"]] == max_row["value"]]
-        names_with_char = person_with_char_df["name"].to_list()
-        for group in groups:
-            prob += sum(d_vars[(name, group)] for name in names_with_char) <= max_row["maximum"]
-    return prob
-
-def max_char_constraint_elastic(prob, d_vars, groups, file, sheet="Constraint - Maximum"):
-    """
-    Add elastic constraint to encourage no more than maximum number of people with specified characteristic assigned to each group. Allow maximum number to relax to zero to ensure the feasibility of the problem.
+    Add rigid or elastic maximum characterstic constraint based on elastic parameter. Constraint ensures or encourages no more than the maximum number of people with specified characteristic assigned to each group. With elastic constraint, allow maximum number to relax to zero to ensure the feasibility of the problem.
     """
     person_df = import_from_template(file, "Person Setup")
     max_df = import_from_template(file, sheet)
@@ -169,24 +156,17 @@ def max_char_constraint_elastic(prob, d_vars, groups, file, sheet="Constraint - 
         person_with_char_df = person_df.loc[person_df[max_row["characteristic"]] == max_row["value"]]
         names_with_char = person_with_char_df["name"].to_list()
         for group in groups:
-            constraint_lhs = sum(d_vars[(name, group)] for name in names_with_char)
-            constraint_rhs = max_row["maximum"]
-            # sense value -1 means less than or equal to (<=)
-            constraint = pulp.LpConstraint(constraint_lhs, sense=-1, name=int(10000 * random.random()), rhs=constraint_rhs)
-            # penalty-free target interval of 100% on left and 0% on right side of the rhs value ==> [0, constraint_rhs]
-            e_constraint = constraint.makeElasticSubProblem(penalty=1, proportionFreeBoundList=[1, 0])
-            prob.extend(e_constraint)
+            if elastic:
+                constraint_lhs = sum(d_vars[(name, group)] for name in names_with_char)
+                constraint_rhs = max_row["maximum"]
+                # sense value -1 means less than or equal to (<=)
+                constraint = pulp.LpConstraint(constraint_lhs, sense=-1, name=int(1000000 * random.random()), rhs=constraint_rhs)
+                # penalty-free target interval of 100% on left and 0% on right side of the rhs value ==> [0, constraint_rhs]
+                e_constraint = constraint.makeElasticSubProblem(penalty=1, proportionFreeBoundList=[1, 0])
+                prob.extend(e_constraint)
+            else:
+                prob += sum(d_vars[(name, group)] for name in names_with_char) <= max_row["maximum"]
     return prob
-
-
-def max_char_constraint(prob, d_vars, groups, file, elastic):
-    """
-    Add rigid or elastic maximum charactersitic constraint based on elastic parameter. Constraint ensures or encourages no more than the maximum number of people with specified characteristic assigned to each group.
-    """
-    if elastic:
-        return max_char_constraint_elastic(prob, d_vars, groups, file)
-    else:
-        return max_char_constraint_rigid(prob, d_vars, groups, file)
 
 
 def add_constraints(prob, d_vars, file, elastic_max_char_constraint):
@@ -220,14 +200,14 @@ def solve_lp_problem(prob, d_vars):
     return status, solution_df
 
 
-def run_lp_problem(file, elastic, unique_solutions, num_unchanged):
+def run_lp_problem(file, elastic, unique_solutions):
     """
     Setup and solve the LP problem with a rigid or elastic maximum characteristic constraint based on elastic parameter.
     """
     var_tups = create_name_group_tups(file)
     prob, d_vars = setup_lp_problem(var_tups)
     prob = add_constraints(prob, d_vars, file, elastic_max_char_constraint=elastic)
-    prob = add_unique_solution_constraint(prob, d_vars, unique_solutions, num_unchanged)
+    prob = add_unique_solution_constraint(prob, d_vars, unique_solutions)
     status, solution_df = solve_lp_problem(prob, d_vars)
     return status, solution_df
 
@@ -236,29 +216,18 @@ def run_lp_problem(file, elastic, unique_solutions, num_unchanged):
 # Multiple Solution Functions #
 ###############################
 
-def calculate_num_unchanged(pct_changed, file, sheet="Person Setup"):
+def add_unique_solution_constraint(prob, d_vars, unique_solutions):
     """
-    Use specified percent of assignments changed per optimal solution to calculate number of unchanged assignments per optimal solution.
-    """
-    person_df = import_from_template(file, sheet)
-    if pct_changed:
-        num_unchanged = int(len(person_df) * (1 - pct_changed))
-        return num_unchanged
-
-
-def add_unique_solution_constraint(prob, d_vars, unique_solutions, num_unchanged):
-    """
-    Add constraint to ensure each solution has no more than the maximum number of assignments unchanged. Ensures assignment changes between solutions.
+    Add elastic constraint to penalize repeat student assignments. Encourages group assignments to change between solutions.
     """
     if unique_solutions:
         for solution_df in unique_solutions:
             solution_d_vars = [d_vars[(row["name"], row["group"])] for idx, row in solution_df.iterrows()]
-            prob += sum(solution_d_vars) <= num_unchanged
+            # sense value -1 means less than or equal to (<=)
+            # encourage no repeat student assignments
+            constraint = pulp.LpConstraint(sum(solution_d_vars), sense=-1, name=int(1000000 * random.random()), rhs=0)
+            # penalty-free target interval of 0% on either side of rhs (0)
+            # penalize repeat student assignments
+            e_constraint = constraint.makeElasticSubProblem(penalty=1, proportionFreeBound=0)
+            prob.extend(e_constraint)
     return prob
-
-
-
-
-
-
-
