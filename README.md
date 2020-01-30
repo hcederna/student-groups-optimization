@@ -1,4 +1,5 @@
 
+
 # Student Groups Optimization
 
 Use linear programming to assign students to groups subject to constraints specifying:
@@ -25,7 +26,7 @@ Click  `Clone or download`  and `Download ZIP`. Once the download is complete, u
 
 ### Setup a virtual environment with Anaconda
 
-The next step is to create a virtual environment on your computer. This environment will hold the Python version and packages necessary for student groups optimization. We can build the environment using the [Anaconda Distribution](https://www.anaconda.com/what-is-anaconda/), a popular Python data science platform for package management and deployment. If you already have Anaconda installed, move on to the next step. Otherwise, [download Anaconda here](https://www.anaconda.com/download/).
+The next step is to create a virtual environment on your computer. This environment holds the Python version and packages necessary for student groups optimization. We can build the environment using the [Anaconda Distribution](https://www.anaconda.com/what-is-anaconda/), a popular Python data science platform for package management and deployment. If you already have Anaconda installed, move on to the next step. Otherwise, [download Anaconda here](https://www.anaconda.com/download/).
 
 To confirm Anaconda is installed correctly, [open a terminal window](http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line) and run:
 
@@ -33,7 +34,7 @@ To confirm Anaconda is installed correctly, [open a terminal window](http://blog
 conda --version
 ```
 
-You should see the installed version number, such as `conda 4.7.12`. If instead you see an error message, reference [verifying that conda is installed](https://docs.anaconda.com/anaconda/install/verify-install/) in the conda documentation.
+You should see the installed version number, such as `conda 4.7.12`. If instead, you see an error message, reference [verifying that conda is installed](https://docs.anaconda.com/anaconda/install/verify-install/) in the conda documentation.
 
 With Anaconda correctly installed, navigate in the terminal to the `student-groups-optimization-master` directory using the command:
 
@@ -49,7 +50,7 @@ Once in the correct directory, you can use the `environment.yml` file to create 
 conda env create -f environment.yml
 ```
 
-This will install the necessary packages and may take some time to finish. Once the process is complete, run:
+This installs the necessary packages and may take some time to finish. Once the process is complete, run:
 
 ```
 conda info --env
@@ -63,13 +64,13 @@ Activate the `student-groups` virtual environment by running the following comma
 conda activate student-groups
 ```
 
-Verify the `student-groups` environment was installed correctly using:
+Verify that the `student-groups` environment installed correctly using:
 
 ```
 conda list
 ```
 
-You should see a list of packages and package versions installed in your environment, including You should see a list of installed packages and package versions including `jupyter 1.0.0`, `openpyxl 3.0.1`, `pandas 0.25.2`, `pulp 1.6.8`, `python 3.7.5`, and `xlrd 1.2.0` . If instead you see an error message, reference [creating an environment from an environment.yml file](https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file) in the conda documentation.
+You should see a list of packages and package versions installed in your environment, including You should see a list of installed packages and package versions including `jupyter 1.0.0`, `openpyxl 3.0.1`, `pandas 0.25.2`, `pulp 1.6.8`, `python 3.7.5`, and `xlrd 1.2.0`. If instead, you see an error message, reference [creating an environment from an environment.yml file](https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file) in the conda documentation.
 
 #### Option 2: Create an environment and install necessary packages
 
@@ -79,7 +80,7 @@ Once in the correct directory, you can create a `student-groups` virtual environ
 conda create -n student-groups python=3.7.5 pandas=0.25.2 jupyter=1.0.0 xlrd=1.2.0 openpyxl=3.0.1
 ```
 
-When prompted to proceed type `y` and hit `Enter`. This will install the correct version of Python along with the correct versions of the pandas, Jupyter, xlrd, and openpyxl packages into a newly created student-groups virtual environment. Note that each installation may take some time to finish.
+When prompted to proceed, type `y` and hit `Enter`. This installs the correct version of Python along with the correct versions of the pandas, Jupyter, xlrd, and openpyxl packages into a newly created student-groups virtual environment. Note that each installation may take some time to finish.
 
 Now activate the `student-groups` environment by running:
 
@@ -93,7 +94,7 @@ You need to install one additional package called PuLP using conda-forge before 
 conda install -c conda-forge pulp
 ```
 
-When prompted to proceed type `y` and hit `Enter`.
+When prompted to proceed, type `y` and hit `Enter`.
 
 Verify your `student-groups` environment is set up correctly using:
 
@@ -101,11 +102,11 @@ Verify your `student-groups` environment is set up correctly using:
 conda list
 ```
 
-You should see a list of installed packages and package versions including `jupyter 1.0.0`, `openpyxl 3.0.1`, `pandas 0.25.2`, `pulp 1.6.8`, `python 3.7.5`, and `xlrd 1.2.0` . If instead you see an error message, reference [installing packages](https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/) in the conda documentation.
+You should see a list of installed packages and package versions, including `jupyter 1.0.0`, `openpyxl 3.0.1`, `pandas 0.25.2`, `pulp 1.6.8`, `python 3.7.5`, and `xlrd 1.2.0`. If instead, you see an error message, reference [installing packages](https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/) in the conda documentation.
 
 ### *Alternative without Anaconda: Install necessary packages*
 
-You will need `Python 3.5` or greater along with the `pandas`, `pulp`, `jupyter`, `xlrd`, and `openpyxl` packages to successfully run the student groups optimization program.
+You need `Python 3.5` or greater along with the `pandas`, `pulp`, `jupyter`, `xlrd`, and `openpyxl` packages to successfully run the student groups optimization program.
 
 ### Enter data using Google Sheets
 
@@ -171,7 +172,7 @@ Go to the `Constraint - In` sheet to specify which (if any) students to assign t
 </p>    
 
 - __name:__ enter student name
-- __group id:__ enter specific group to assign to student 
+- __group id:__ enter the specific group to assign to the student 
 
 #### Constraint - Not In
 
@@ -182,7 +183,7 @@ Go to the `Constraint - Not In` sheet to specify which (if any) students to not 
 </p>    
 
 - __name:__ enter student name
-- __group id:__ enter specific group to not assign to student 
+- __group id:__ enter the specific group to not assign to the student 
 
 #### Constraint - Homogenous
 
@@ -192,13 +193,13 @@ Go to the `Constraint - Homogenous` sheet to specify which (if any) groups to as
     <img src="images/constraint_homogenous.png" title="Constraint - Homogenous">
 </p>   
 
-- __group id:__ enter group to assign only students with specified characteristic and characteristic value
+- __group id:__ enter group to assign only students with a specified characteristic and characteristic value
 - __characteristic:__ specify characteristic
 - __value:__ specify characteristic value
 
 #### Constraint - Maximum
 
-Go to the `Constraint - Maximum` sheet to specify the maximum number of students with specified characteristic to assign to each group.
+Go to the `Constraint - Maximum` sheet to specify the maximum number of students with a specified characteristic to assign to each group.
 
 <p align="center">
     <img src="images/constraint_maximum.png" title="Constraint - Maximum">
@@ -235,7 +236,7 @@ python run_program.py filename num_solutions [-v] [-s]
 ```
 
 with positional arguments (order matters):
-- __filename:__ filename for Excel spreadsheet with student, group, and constraint data as `your_filename_here.xlsx`
+- __filename:__ filename for Excel spreadsheet with the student, group, and constraint data as `your_filename_here.xlsx`
 - __num_solutions:__ desired number of optimal solutions
 
 and optional arguments:
@@ -245,19 +246,19 @@ and optional arguments:
 
 _Examples:_
 
-- Run program using student, group, and constraint data in `data_template.xlsx`. Output 3 optimal student groupings. Print student groupings to terminal window and save solutions to Excel spreadsheet.
+- Run program using student, group, and constraint data in `data_template.xlsx`. Output 3 optimal student groupings. Print student groupings to the terminal window and save solutions to an Excel spreadsheet.
 
 <p align="center">
     <img src="images/run_program_1.png" title="Run Program - Example 1">
 </p>    
 
-- Run program using student, group, and constraint data in `data_template.xlsx`. Output 2 optimal student groupings. Save solutions to Excel spreadsheet.
+- Run program using student, group, and constraint data in `data_template.xlsx`. Output 2 optimal student groupings. Save solutions to an Excel spreadsheet.
 
 <p align="center">
     <img src="images/run_program_2.png" title="Run Program - Example 2">
 </p>    
 
-- Run program using student, group, and constraint data in `data_template.xlsx`. Output 1 optimal student grouping. Print student groupings to terminal window.
+- Run program using student, group, and constraint data in `data_template.xlsx`. Output 1 optimal student grouping. Print student groupings to the terminal window.
 
 <p align="center">
     <img src="images/run_program_3.png" title="Run Program - Example 3">
@@ -267,14 +268,14 @@ Congratulations! You are now a student group optimizing machine!
 
 #### _Optional: Check constraints satisfied_ 
 
-To double check that the student grouping solution(s) output by the program satisfy your specified constraints, run a command of the form:
+To double-check that the student grouping solution(s) output by the program satisfy your specified constraints, run a command of the form:
 
 ```
 python check_constraints.py data_filename groups_filename
 ```
 
 with positional arguments (order matters):
-- __data_filename:__ filename for Excel spreadsheet with student, group, and constraint data as `your_filename_here.xlsx`
+- __data_filename:__ filename for Excel spreadsheet with the student, group, and constraint data as `your_filename_here.xlsx`
 - __groups_filename:__ filename for Excel spreadsheet with student groups as `your_filename_here.xlsx`
 
 _Example:_
@@ -294,7 +295,7 @@ python check_uniqueness.py data_filename groups_filename
 ```
 
 with positional arguments (order matters):
-- __data_filename:__ filename for Excel spreadsheet with student, group, and constraint data as `your_filename_here.xlsx`
+- __data_filename:__ filename for Excel spreadsheet with the student, group, and constraint data as `your_filename_here.xlsx`
 - __groups_filename:__ filename for Excel spreadsheet with student groups as `your_filename_here.xlsx`
 
 _Example:_
